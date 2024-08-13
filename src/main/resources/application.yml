@@ -1,0 +1,45 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3307/reactlibrarydatabase?useSSL=false&useUnicode=yes&characterEncoding=UTF-8&allowPublicKeyRetrieval=true&serverTimezone=UTC
+    username: root
+    password: huy22092003
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+  data:
+    rest:
+      base-path: /api
+  security:
+    oauth2:
+      client:
+        registration:
+          github:
+            clientId: Ov23liQleyimMuToKRvi
+            clientSecret: 54d0d6c6bda3a688e4fc83d0079b21f8f13dd94e
+            scope:
+              - read:user
+              - user:email
+          google:
+            client-id: 296566469026-mufon3elg2slfhj50fq653p0c4u2co51.apps.googleusercontent.com
+            client-secret: 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
+            scope:
+              - email
+              - profile
+          facebook:
+            client-id: 1222403195602845
+            client-secret: 9eadab0f0e35618dd2473bf5faca9303
+            scope:
+              - public_profile
+              - email
+            client-name: Facebook
+
+
+jwt:
+  expiration: 2592000
+  secretKey: ZXZlcnlib2R5IGRpZXMgaW4gdGhlaXIgbmlnaHRtYXJl
+

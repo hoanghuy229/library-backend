@@ -30,6 +30,4 @@ public class UserResponse {
     @JsonProperty("role")
     private String role;
 
-    @JsonProperty("token")
-    private String token;
 }

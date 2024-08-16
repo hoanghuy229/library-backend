@@ -57,19 +57,26 @@ public class JwtFilter extends OncePerRequestFilter {
         }
     }
 
-    private boolean isByPassToken(@NonNull HttpServletRequest request){
-        final List<Pair<String,String>> bypassTokens = Arrays.asList(
-                Pair.of("api/books","GET"),
-                Pair.of("api/reviews","GET"),
-                Pair.of("api/users","GET")
+    private boolean isByPassToken(@NonNull HttpServletRequest request) {
+        final List<Pair<String, String>> bypassTokens = Arrays.asList(
+                Pair.of("api/books", "GET"),
+                Pair.of("api/reviews", "GET"),
+                Pair.of("api/users", "GET")
         );
 
-        for(Pair<String,String> bypasstoken : bypassTokens){
-            if(request.getServletPath().contains(bypasstoken.getFirst())&&
-                request.getMethod().equals(bypasstoken.getSecond())) {
+        String servletPath = request.getServletPath();
+        String method = request.getMethod();
+
+        if (servletPath.contains("api/reviews/by-user")) {
+            return false;
+        }
+
+        for (Pair<String, String> bypassToken : bypassTokens) {
+            if (servletPath.contains(bypassToken.getFirst()) && method.equals(bypassToken.getSecond())) {
                 return true;
             }
         }
         return false;
     }
+
 }

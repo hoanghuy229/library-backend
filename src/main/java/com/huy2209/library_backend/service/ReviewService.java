@@ -2,7 +2,7 @@ package com.huy2209.library_backend.service;
 
 import com.huy2209.library_backend.dao.BookRepository;
 import com.huy2209.library_backend.dao.ReviewRepository;
-import com.huy2209.library_backend.dto.ReviewRequest;
+import com.huy2209.library_backend.dto.request.ReviewRequest;
 import com.huy2209.library_backend.entity.Review;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

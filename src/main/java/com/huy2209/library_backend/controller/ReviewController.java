@@ -1,7 +1,7 @@
 package com.huy2209.library_backend.controller;
 
 import com.huy2209.library_backend.component.JwtUtil;
-import com.huy2209.library_backend.dto.ReviewRequest;
+import com.huy2209.library_backend.dto.request.ReviewRequest;
 import com.huy2209.library_backend.service.IReviewService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

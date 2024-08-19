@@ -19,6 +19,9 @@ public interface BookRepository extends JpaRepository<Book, Long> {
 
     @Query("SELECT b FROM Book b LEFT JOIN Review r ON b.id = r.bookId " +
             "GROUP BY b HAVING COUNT(r.id) > 0 ORDER BY AVG(r.rating) DESC")
-    List<Book> findTopRatedBooks();
+    Page<Book> findTopRatedBooks(Pageable pageable);
+
+    @Query("SELECT b FROM Book b WHERE id in :book_ids")
+    List<Book> findBookByBookIds(@Param("book_ids") List<Long> bookIds);
 
 }

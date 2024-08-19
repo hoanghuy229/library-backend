@@ -67,7 +67,8 @@ public class JwtFilter extends OncePerRequestFilter {
         String servletPath = request.getServletPath();
         String method = request.getMethod();
 
-        if (servletPath.contains("api/reviews/by-user")) {
+        if (servletPath.contains("api/reviews/by-user") || servletPath.contains("api/users/current-loans") ||
+            servletPath.contains("api/users/user-histories") || servletPath.contains("api/messages")) {
             return false;
         }
 

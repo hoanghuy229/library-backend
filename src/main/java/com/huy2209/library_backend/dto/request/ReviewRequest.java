@@ -1,4 +1,4 @@
-package com.huy2209.library_backend.dto;
+package com.huy2209.library_backend.dto.request;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;

@@ -2,6 +2,8 @@ package com.huy2209.library_backend.config;
 
 import com.huy2209.library_backend.entity.Book;
 import com.huy2209.library_backend.entity.Review;
+import org.modelmapper.ModelMapper;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
 import org.springframework.data.rest.webmvc.config.RepositoryRestConfigurer;
@@ -12,6 +14,10 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 public class MyDataRestConfig implements RepositoryRestConfigurer {
     private String theAllowedOrigins = "http://localhost:3000";
 
+    @Bean
+    public ModelMapper modelMapper(){
+        return new ModelMapper();
+    }
     @Override
     public void configureRepositoryRestConfiguration(RepositoryRestConfiguration config, CorsRegistry cors){
         HttpMethod[] theUnsupportedActions = {

@@ -37,4 +37,7 @@ public class Book {
 
     @Column(name = "img")
     private String image;
+
+    @Column(name = "is_actived")
+    private boolean isActived;
 }

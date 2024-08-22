@@ -5,6 +5,7 @@ import com.huy2209.library_backend.dao.BookRepository;
 import com.huy2209.library_backend.dao.CheckoutRepository;
 import com.huy2209.library_backend.dao.HistoryRepository;
 import com.huy2209.library_backend.dao.UserRepository;
+import com.huy2209.library_backend.dto.request.AddBookRequest;
 import com.huy2209.library_backend.dto.response.HistoriesResponse;
 import com.huy2209.library_backend.dto.response.ShelfCurrentLoansResponse;
 import com.huy2209.library_backend.dto.response.UserResponse;
@@ -151,6 +152,65 @@ public class UserService implements IUserService{
     public Page<HistoriesResponse> getAllHistories(String getEmail, PageRequest pageRequest) throws Exception {
         Page<History> histories = historyRepository.findByUserEmail(getEmail,pageRequest);
         return histories.map(history -> modelMapper.map(history,HistoriesResponse.class));
+    }
+
+    @Override
+    public void adminAddBook(AddBookRequest addBookRequest){
+        Book book = Book
+                .builder()
+                .title(addBookRequest.getTitle())
+                .author(addBookRequest.getAuthor())
+                .description(addBookRequest.getDescription())
+                .copies(addBookRequest.getCopies())
+                .copiesAvailable(addBookRequest.getCopies())
+                .image(addBookRequest.getImage())
+                .category(addBookRequest.getCategory())
+                .isActived(true)
+                .build();
+
+        bookRepository.save(book);
+    }
+
+    @Override
+    public void adminIncreaseBookQuantity(Long bookId) throws Exception {
+        Optional<Book> existBook = bookRepository.findById(bookId);
+        if(existBook.isEmpty()){
+            throw new Exception("book not found");
+        }
+        existBook.get().setCopiesAvailable(existBook.get().getCopiesAvailable() + 1);
+        existBook.get().setCopies(existBook.get().getCopies() + 1);
+
+        bookRepository.save(existBook.get());
+    }
+
+    @Override
+    public void adminDecreaseBookQuantity(Long bookId) throws Exception {
+        Optional<Book> existBook = bookRepository.findById(bookId);
+        if(existBook.isEmpty() || existBook.get().getCopies() <= 0 || existBook.get().getCopiesAvailable() <= 0){
+            throw new Exception("book not found");
+        }
+        existBook.get().setCopiesAvailable(existBook.get().getCopiesAvailable() - 1);
+        existBook.get().setCopies(existBook.get().getCopies() - 1);
+
+        bookRepository.save(existBook.get());
+    }
+
+    @Override
+    public void changeBookStatus(Long bookId,String status) throws Exception {
+        Optional<Book> existBook = bookRepository.findById(bookId);
+
+        if(existBook.isEmpty()){
+            throw new Exception("Error");
+        }
+
+        if(status.equals("true") && !existBook.get().isActived()){
+            existBook.get().setActived(true);
+            bookRepository.save(existBook.get());
+        }
+        else{
+            existBook.get().setActived(false);
+            bookRepository.save(existBook.get());
+        }
     }
 
     private void redirect(HttpServletResponse response, String token,String role) throws IOException {

@@ -1,5 +1,6 @@
 package com.huy2209.library_backend.service;
 
+import com.huy2209.library_backend.dto.request.AddBookRequest;
 import com.huy2209.library_backend.dto.response.HistoriesResponse;
 import com.huy2209.library_backend.dto.response.ShelfCurrentLoansResponse;
 import jakarta.servlet.http.HttpServletResponse;
@@ -20,4 +21,12 @@ public interface IUserService {
     void renewLoan(String userEmail,Long bookId) throws Exception;
 
     Page<HistoriesResponse> getAllHistories(String getEmail, PageRequest pageRequest) throws Exception;
+
+    void adminAddBook(AddBookRequest addBookRequest);
+
+    void adminIncreaseBookQuantity(Long bookId) throws Exception;
+
+    void adminDecreaseBookQuantity(Long bookId) throws Exception;
+
+    void changeBookStatus(Long bookId,String status) throws Exception;
 }

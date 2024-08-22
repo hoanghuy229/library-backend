@@ -1,6 +1,7 @@
 package com.huy2209.library_backend.controller;
 
 import com.huy2209.library_backend.component.JwtUtil;
+import com.huy2209.library_backend.dto.request.AddBookRequest;
 import com.huy2209.library_backend.dto.response.HistoriesResponse;
 import com.huy2209.library_backend.dto.response.PageHistoriesResponse;
 import com.huy2209.library_backend.dto.response.ShelfCurrentLoansResponse;
@@ -90,6 +91,51 @@ public class UserController {
         }
         catch (Exception e){
             return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @PostMapping("/admin")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    public ResponseEntity<String> adminAddBook(@RequestBody AddBookRequest addBookRequest) throws Exception{
+        try{
+            iUserService.adminAddBook(addBookRequest);
+            return ResponseEntity.ok("add book success");
+        }
+        catch (Exception e){
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @DeleteMapping("/admin")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    public void changeStatus(@RequestParam("bookId") Long bookId,@RequestParam("status") String status) throws Exception {
+        try{
+            iUserService.changeBookStatus(bookId,status);
+        }
+        catch (Exception e){
+            throw new Exception();
+        }
+    }
+
+    @PutMapping("/admin/increase-book")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    public void increaseBookQuantity(@RequestParam Long bookId) throws Exception {
+        try{
+            iUserService.adminIncreaseBookQuantity(bookId);
+        }
+        catch (Exception e){
+            throw new Exception();
+        }
+    }
+
+    @PutMapping("/admin/decrease-book")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    public void decreaseBookQuantity(@RequestParam Long bookId) throws Exception {
+        try{
+            iUserService.adminDecreaseBookQuantity(bookId);
+        }
+        catch (Exception e){
+            throw new Exception();
         }
     }
 

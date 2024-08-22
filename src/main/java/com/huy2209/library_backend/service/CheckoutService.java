@@ -30,7 +30,7 @@ public class CheckoutService implements ICheckoutService{
 
         Checkout validateCheckout = checkoutRepository.findByUserEmailAndBookId(userEmail, bookId);
 
-        if(existUser.isEmpty() || book.isEmpty() || validateCheckout != null || book.get().getCopiesAvailable() <=0){
+        if(existUser.isEmpty() || book.isEmpty() || validateCheckout != null || book.get().getCopiesAvailable() <=0 || !book.get().isActived()){
             throw new Exception("already checked out by user or unavailable");
         }
         book.get().setCopiesAvailable(book.get().getCopiesAvailable() - 1);

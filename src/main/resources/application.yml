@@ -1,5 +1,14 @@
 server:
-  port: 8080
+  port: 8443
+  ssl:
+    enabled: true
+    key-alias: luv2code
+    key-store: classpath:luv2code-keystore.p12
+    key-store-password: secret
+    key-store-type: PKCS12
+
+front-end:
+  baseUrl: https://localhost:3000
 
 spring:
   datasource:

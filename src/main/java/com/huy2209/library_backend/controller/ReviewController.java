@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("api/reviews")
 @RequiredArgsConstructor
-@CrossOrigin("http://localhost:3000")
+@CrossOrigin("${front-end.baseUrl}")
 public class ReviewController {
     private final IReviewService iReviewService;
     private final JwtUtil jwtUtil;

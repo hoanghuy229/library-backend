@@ -19,7 +19,7 @@ import java.util.List;
 @RestController
 @RequestMapping("api/messages")
 @RequiredArgsConstructor
-@CrossOrigin("http://localhost:3000")
+@CrossOrigin("${front-end.baseUrl}")
 public class MessageController {
     private final IMessageService iMessageService;
     private final JwtUtil jwtUtil;

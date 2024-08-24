@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("api/checkouts")
 @RequiredArgsConstructor
-@CrossOrigin("http://localhost:3000")
+@CrossOrigin("${front-end.baseUrl}")
 public class CheckoutController {
     private final ICheckoutService iCheckoutService;
     private final JwtUtil jwtUtil;

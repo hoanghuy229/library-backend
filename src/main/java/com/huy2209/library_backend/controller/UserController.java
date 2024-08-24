@@ -24,7 +24,7 @@ import java.util.List;
 @RestController
 @RequestMapping("api/users")
 @RequiredArgsConstructor
-@CrossOrigin("http://localhost:3000")
+@CrossOrigin("${front-end.baseUrl}")
 public class UserController {
 
     private final IUserService iUserService;

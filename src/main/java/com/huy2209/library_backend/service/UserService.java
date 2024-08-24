@@ -17,6 +17,7 @@ import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.security.oauth2.client.OAuth2AuthorizedClient;
@@ -43,6 +44,9 @@ public class UserService implements IUserService{
     private final BookRepository bookRepository;
     private final HistoryRepository historyRepository;
     private final ModelMapper modelMapper;
+
+    @Value("${front-end.baseUrl}")
+    private String baseUrl;
 
     @Override
     public void login(OAuth2User principal, OAuth2AuthorizedClient authorizedClient, HttpServletResponse response) throws Exception {
@@ -228,7 +232,7 @@ public class UserService implements IUserService{
 
         response.addCookie(jwtCookie);
         response.addCookie(userRole);
-        response.sendRedirect("http://localhost:3000");
+        response.sendRedirect(baseUrl);
     }
 
     private UserResponse buildUserResponse(String token,User user){

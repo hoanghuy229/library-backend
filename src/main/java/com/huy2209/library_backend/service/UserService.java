@@ -159,7 +159,7 @@ public class UserService implements IUserService{
     }
 
     @Override
-    public void adminAddBook(AddBookRequest addBookRequest){
+    public void addNewBook(AddBookRequest addBookRequest){
         Book book = Book
                 .builder()
                 .title(addBookRequest.getTitle())

@@ -96,9 +96,9 @@ public class UserController {
 
     @PostMapping("/admin")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    public ResponseEntity<String> adminAddBook(@RequestBody AddBookRequest addBookRequest) throws Exception{
+    public ResponseEntity<String> addNewBook(@RequestBody AddBookRequest addBookRequest) throws Exception{
         try{
-            iUserService.adminAddBook(addBookRequest);
+            iUserService.addNewBook(addBookRequest);
             return ResponseEntity.ok("add book success");
         }
         catch (Exception e){

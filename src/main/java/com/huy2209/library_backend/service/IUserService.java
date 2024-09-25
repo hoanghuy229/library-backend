@@ -22,7 +22,7 @@ public interface IUserService {
 
     Page<HistoriesResponse> getAllHistories(String getEmail, PageRequest pageRequest) throws Exception;
 
-    void adminAddBook(AddBookRequest addBookRequest);
+    void addNewBook(AddBookRequest addBookRequest);
 
     void adminIncreaseBookQuantity(Long bookId) throws Exception;
 
